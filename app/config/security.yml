@@ -7,9 +7,12 @@ security:
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: ~
-
+      in_memory:
+        memory: ~
+      our_db_provider:
+                  entity:
+                      class: AppBundle:User
+                      property: username
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -17,7 +20,16 @@ security:
             security: false
 
         main:
+            form_login:
+              login_path: login
+              check_path: login
+
+            pattern: ^/
+            http_basic: ~
+            provider: our_db_provider
+
             anonymous: ~
+
             # activate different ways to authenticate
 
             # http_basic: ~
