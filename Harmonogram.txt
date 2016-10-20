@@ -1,0 +1,43 @@
+﻿Serwis ogłoszeniowy do sprzedarzy samochodów
+
+Opis:
+Po wejściu na strone użytkownik widzi liste ofert samochodów.
+Na liście widać pierwsze 10 ogłoszeń następne moża zobaczyć na
+kolejnych podstronnach (ponumerowane poniżej listy 1,2,...)
+Po kliknięciu w oferte wyświetlają się szczegóły oferty wraz ze 
+zdjęciem samochodu. Przeglądać oferty moga użytkownicy niezarejestrowani
+oraz zarejestrowani. Po rejestraci lub zalogowaniu użytkownik może 
+dodawać nowe ogłoszenia za pomocą odpowiedniego formularza.
+Admoże konfigurować stronę(maksymalna liczba ogłoszeń itp.)
+Administrator może edytować i usuwać oferty. 
+
+Funkcjonalności: 
+- Autoryzacja:
+	- stworzenie i konfiguracja bazy danych do przechowywania użytkowników
+	- rejestracja
+	- logowanie
+	- panel użytkownika 
+	
+- Dodawanie ogłoszenia
+	- stworzenie kalsy ogłoszenia 
+	- stworzenie formularza
+	- udostępnienie formularza tylko dla zalogowanych użytkowników
+	- dodawanie zdjącia do ogłoszenia bibliotekat gh php 
+	
+- Przeglądanie istniejących ogłoszeń
+	- wyświetlanie 10 ogłoszen na stronie
+	- przeglądanie następnych ogłoszeń na kolejnych podstronach
+	- wyświetlanie pojedynczego ogłoszenia
+	- wyswietlanie pojedynczego ogłoszenia ze zdjęciem samochodu
+	
+- Sortowanie i wyszukiwanie
+	- sortowanie wg daty dodania
+	- sortowanie wg ceny
+	- wyszukianie ogłoszeń danego modelu samochodu
+	- wyszukiwanie ogłoszeń z danej lokalizacji
+	
+- Panel Administratora
+	- edycja istniejących ogłoszeń
+	- usuwanie istniejących ogłoszeń
+	- usuwanie użytkowników
+	- konfiguracja strony 
