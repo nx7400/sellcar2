@@ -3,5 +3,34 @@
 {% block title %}AppBundle:UserPanel:userPanel{% endblock %}
 
 {% block body %}
-<h1>Welcome to the UserPanel:userPanel page</h1>
+<body>
+    <div id="user_name">
+        <p>Witaj!</p><br>
+        <p>{{ userName }}</p>
+    </div>
+
+
+</body>
+
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+        #user_name{
+            height:300px;
+            width:300px;
+            float: right;
+            background-color: #218BC3;
+            padding: 40px;
+            font-family: Helvetica;
+            font-size: 40px;
+            text-align: center
+        }
+
+        #user_name:hover{
+            background-color: #99CDD8;
+        }
+
+    </style>
 {% endblock %}

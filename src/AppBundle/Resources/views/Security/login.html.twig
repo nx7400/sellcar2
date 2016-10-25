@@ -3,7 +3,6 @@
 {% block title %}AppBundle:Security:login{% endblock %}
 
 
-
 {% block body %}
 
     {% if error %}
@@ -11,13 +10,42 @@
     {% endif %}
 
     <form action="{{ path('login') }}" method="post">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="_username" value=""{{ last_username }} />
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="_password"/>
+        <div id="text1"><h1>Zaloguj się</h1></div>
+        <!--<div class="field_left">Nazwa uzytkownika</div>-->
+        <div id="username_field">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="_username" value="{{ last_username }}" />
+        </div>
 
-        <button type="submit">Login</button>
+        <div id="password_field">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="_password"/>
+        </div>
+
+        <div id="button">
+            <button type="submit">Login</button>
+        </div>
+
     </form>
 
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+        body { background: #F5F5F5; font: 18px/1.5 sans-serif; }
+        h1, h2 { line-height: 1.2; margin: 0 0 .5em; }
+        h1 { background:#F5F5F5; font-size: 36px; }
+        h2 { font-size: 21px; margin-bottom: 1em; }
+        p { margin: 0 0 1em 0; }
+        a { color: #0000F0; }
+        a:hover { text-decoration: none; }
+        code { background: #F5F5F5; max-width: 100px; padding: 2px 6px; word-wrap: break-word; }
+        #text1 { background: #FFF; margin: 1em auto; max-width: 800px; width: 95%; }
+        #text1 {text-align: center}
+        #username_field {text-align: center}
+        #password_field {text-align: center}
+        #button {text-align: center}
+
+    </style>
 {% endblock %}

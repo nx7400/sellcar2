@@ -38,7 +38,12 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
-            $redirection = new RedirectResponse($this->router->generate('userPanel'));
+
+        $user = $token->getUser();
+        $request->getSession()->set('user',$user);
+
+            $redirection = new RedirectResponse($this->router->generate('userPanel'
+            ));
 
         return $redirection;
     }
