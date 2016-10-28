@@ -19,15 +19,17 @@ class AdController extends Controller
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
 
+
+
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
 
-//            $user=$request->getSession()->get('user');
-//            $ad->setUser($user);
+            $user=$request->getSession()->get('user');
+            $ad->setUser($user);
 
             $em = $this->getDoctrine()->getManager();
-            $em->persist($ad);
+            $em->merge($ad); //it working but why?
             $em->flush();
         }
 

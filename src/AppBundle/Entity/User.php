@@ -53,6 +53,8 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
+     * @var \AppBundle\Entity\Ad
+     *
      * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
      */
     private $ads;
@@ -148,6 +150,14 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return string
+     */
+    function __toString()
+    {
+        return $this->username;
+    }
+
+    /**
      * Get email
      *
      * @return string
@@ -220,4 +230,38 @@ class User implements UserInterface, \Serializable
     }
 
 
+
+    /**
+     * Add ad
+     *
+     * @param \AppBundle\Entity\Ad $ad
+     *
+     * @return User
+     */
+    public function addAd(\AppBundle\Entity\Ad $ad)
+    {
+        $this->ads[] = $ad;
+
+        return $this;
+    }
+
+    /**
+     * Remove ad
+     *
+     * @param \AppBundle\Entity\Ad $ad
+     */
+    public function removeAd(\AppBundle\Entity\Ad $ad)
+    {
+        $this->ads->removeElement($ad);
+    }
+
+    /**
+     * Get ads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getAds()
+    {
+        return $this->ads;
+    }
 }
