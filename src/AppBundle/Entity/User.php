@@ -8,14 +8,16 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use AppBundle\Entity\Ad;
 
 
 /**
  * @ORM\Table(name="users")
- * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
 {
@@ -51,15 +53,25 @@ class User implements UserInterface, \Serializable
     private $email;
 
     /**
-     * @ORM\Column(name="is_active", type="boolean")
+     * @ORM\OneToMany(targetEntity="Ad", mappedBy="user")
      */
-    private $isActive;
+    private $ads;
 
-    public function __construct()
-    {
-        $this->isActive = true;
-        // may not be needed, see section on salt below
-        // $this->salt = md5(uniqid(null, true));
+//    /**
+//     * @ORM\Column(name="is_active", type="boolean")
+//     */
+//    private $isActive;
+//
+//    public function __construct()
+//    {
+//        $this->isActive = true;
+//        // may not be needed, see section on salt below
+//        // $this->salt = md5(uniqid(null, true));
+//    }
+
+    public function __construct(){
+
+        $this->ads = new ArrayCollection();
     }
 
     public function getUsername()
@@ -145,29 +157,29 @@ class User implements UserInterface, \Serializable
         return $this->email;
     }
 
-    /**
-     * Set isActive
-     *
-     * @param boolean $isActive
-     *
-     * @return User
-     */
-    public function setIsActive($isActive)
-    {
-        $this->isActive = $isActive;
+//    /**
+//     * Set isActive
+//     *
+//     * @param boolean $isActive
+//     *
+//     * @return User
+//     */
+//    public function setIsActive($isActive)
+//    {
+//        $this->isActive = $isActive;
+//
+//        return $this;
+//    }
 
-        return $this;
-    }
-
-    /**
-     * Get isActive
-     *
-     * @return boolean
-     */
-    public function getIsActive()
-    {
-        return $this->isActive;
-    }
+//    /**
+//     * Get isActive
+//     *
+//     * @return boolean
+//     */
+//    public function getIsActive()
+//    {
+//        return $this->isActive;
+//    }
 
     public function getPlainPassword()
     {

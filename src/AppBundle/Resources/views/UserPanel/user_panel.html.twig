@@ -4,11 +4,42 @@
 
 {% block body %}
 <body>
+    <header>
+        <div id="top_bar">
+            <div id="logo">
+                <span id="menu" onclick="openNav()">MENU</span>
+            </div>
+
+        </div>
+    </header>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ path('homepage') }}">Strona Główna</a>
+        <a href="{{ path('adFrom') }}">Dodaj ogłoszenie</a>
+        <a href="#">Cos</a>
+        <a href="#">Cos</a>
+    </div>
+
+    <div id="user_ads">
+        <p>Twoje ogłoszenia:</p>
+    </div>
+
+
     <div id="user_name">
         <p>Witaj!</p><br>
         <p>{{ userName }}</p>
     </div>
 
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
 
 </body>
 
@@ -17,20 +48,115 @@
 {% block stylesheets %}
     <style>
 
+        body{
+            background-color: #ECF0F1;
+        }
+
+        #menu{
+            font-family: Helvetica, SansSerif;
+            font-size: 40px;
+
+        }
+
+        #menu:hover{
+            color: #818181;
+        }
+
+        #user_ads{
+            height:600px;
+            width:1425px;
+            float: left;
+            background-color: #E74C3C;
+            padding: 40px;
+            font-family: Helvetica, SansSerif;
+            font-size: 40px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+        }
+
+        #user_ads:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
+        }
+
         #user_name{
             height:300px;
             width:300px;
             float: right;
-            background-color: #218BC3;
+            background-color: #2980B9;
             padding: 40px;
-            font-family: Helvetica;
+            font-family: Helvetica, SansSerif;
             font-size: 40px;
-            text-align: center
+            text-align: center;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+
         }
 
         #user_name:hover{
-            background-color: #99CDD8;
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
         }
+
+        #top_bar{
+            height: 80px;
+            background-color: #2C3E50;
+            margin-bottom: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+        }
+
+        #logo{
+            height: 80px;
+            width: 200px;
+            background-color: #99CDD8;
+            text-align: center;
+        }
+
+        #logo:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+
+        /* The side navigation menu */
+        .sidenav {
+            height: 100%; /* 100% Full-height */
+            width: 0; /* 0 width - change this with JavaScript */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Stay on top */
+            top: 0;
+            left: 0;
+            background-color: #111; /* Black*/
+            overflow-x: hidden; /* Disable horizontal scroll */
+            padding-top: 60px; /* Place content 60px from the top */
+            transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s
+        }
+
+        .sidenav a:hover, .offcanvas a:focus{
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
 
     </style>
 {% endblock %}

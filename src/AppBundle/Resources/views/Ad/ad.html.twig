@@ -1,19 +1,22 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:Registration:registration{% endblock %}
+{% block title %}AppBundle:Ad:ad{% endblock %}
 
 {% block body %}
-
-    <h1>Zarejestruj się!</h1>
+    <h1>Dodaj Ogłoszenie</h1>
     {{ form_start(form) }}
 
-    {{ form_row(form.username) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+    {{ form_row(form.title) }}
+    {{ form_row(form.brand) }}
+    {{ form_row(form.model) }}
+    {{ form_row(form.yearProduction) }}
+    {{ form_row(form.power) }}
+    {{ form_row(form.kilometers) }}
+    {{ form_row(form.price) }}
 
-    <button type="submit">Register!</button>
+    <button type="submit">Dodaj!</button>
     {{ form_end(form) }}
+
 
 {% endblock %}
 
