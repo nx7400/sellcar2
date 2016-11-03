@@ -16,6 +16,12 @@ class AdController extends Controller
      */
     public function adAction(Request $request)
     {
+
+        $user=$request->getSession()->get('user');
+        if($user == NULL){
+            die('Musisz byc zalogowany');
+        }
+
         $ad = new Ad();
         $form = $this->createForm(AdType::class, $ad);
 
