@@ -72,7 +72,25 @@ class Ad
      */
     private $kilometers;
 
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @Assert\NotBlank(message="Prosze dodac zdjecie samochodu")
+     * @Assert\File(mimeTypes={ "image/jpeg" })
+     */
+    private $image;
 
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
 
     /**
      * @return mixed

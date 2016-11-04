@@ -12,6 +12,17 @@ services:
     class: AppBundle\Handler\LogoutSuccessHandler
     arguments: ["@router"]
 
+  app.image_uploader:
+          class: AppBundle\UploadService\ImageUploader
+          arguments: ["%image_directory%"]
+
+  app.doctrine_image_listener:
+          class: AppBundle\EventListener\ImageUploadListener
+          arguments: ["@app.image_uploader"]
+          tags:
+              - { name: doctrine.event_listener, event: prePersist }
+              - { name: doctrine.event_listener, event: preUpdate }
+
 #    service_name:
 #        class: AppBundle\Directory\ClassName
 #        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
