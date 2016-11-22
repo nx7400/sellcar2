@@ -1,9 +1,7 @@
-{% extends "::base.html.twig" %}
-
-{% block title %}AppBundle:UserPanel:userPanel{% endblock %}
+{% extends 'base.html.twig' %}
 
 {% block body %}
-<body>
+
     <header>
         <div id="top_bar">
             <div id="logo">
@@ -13,23 +11,16 @@
         </div>
     </header>
 
+    <div id="ad_details"><p>Szczegóły ogłoszenia</p></div>
+
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ path('homepage') }}">Strona Główna</a>
+        <a href="{{ path('login') }}">Zaloguj sie</a>
+        <a href="{{ path('register') }}">Zarejestruj sie</a>
         <a href="{{ path('adForm') }}">Dodaj ogłoszenie</a>
-        <a href="{{ path('ad_index') }}">Zobacz ogłoszenia</a>
-        <a href="{{ path('logout') }}">Wyloguj</a>
+        <a href="{{ path('userPanel') }}">Panel uzytkownika</a>
     </div>
 
-    <div id="user_ads">
-        <p>Twoje ogłoszenia:</p>
-    </div>
-
-
-    <div id="user_name">
-        <p>Witaj!</p><br>
-        <p>{{ userName }}</p>
-    </div>
 
     <script>
         function openNav() {
@@ -41,8 +32,56 @@
         }
     </script>
 
-</body>
 
+    <table>
+        <tbody>
+            <tr>
+                <th>Tytuł</th>
+                <td>{{ ad.title }}</td>
+            </tr>
+            <tr>
+                <th>Cena</th>
+                <td>{{ ad.price }}</td>
+            </tr>
+            <tr>
+                <th>Marka</th>
+                <td>{{ ad.brand }}</td>
+            </tr>
+            <tr>
+                <th>Model</th>
+                <td>{{ ad.model }}</td>
+            </tr>
+            <tr>
+                <th>Rok produkcji</th>
+                <td>{{ ad.yearProduction }}</td>
+            </tr>
+            <tr>
+                <th>Moc</th>
+                <td>{{ ad.power }}</td>
+            </tr>
+            <tr>
+                <th>Przebieg</th>
+                <td>{{ ad.kilometers }}</td>
+            </tr>
+
+        </tbody>
+    </table>
+
+
+    <ul>
+        <li>
+            <a href="{{ path('ad_index') }}">Wróć do listy ogłoszeń</a>
+        </li>
+       <!-- <li>
+            <a href="{{ path('ad_edit', { 'id': ad.id }) }}">Edit</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+        !-->
+    </ul>
 {% endblock %}
 
 {% block stylesheets %}
@@ -62,39 +101,16 @@
             color: #818181;
         }
 
-        #user_ads{
-            height:600px;
-            width:1425px;
-            float: left;
+        #ad_details{
+            height: 50px;
             background-color: #E74C3C;
-            padding: 40px;
-            font-family: Helvetica, SansSerif;
-            font-size: 40px;
+            margin-bottom: 5px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            transition: 0.3s;
-        }
-
-        #user_ads:hover{
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-        }
-
-        #user_name{
-            height:300px;
-            width:300px;
-            float: right;
-            background-color: #2980B9;
-            padding: 40px;
-            font-family: Helvetica, SansSerif;
-            font-size: 40px;
-            text-align: center;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            transition: 0.3s;
+            font-family: SansSerif;
+            font-size: 25px;
 
         }
 
-        #user_name:hover{
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-        }
 
         #top_bar{
             height: 80px;

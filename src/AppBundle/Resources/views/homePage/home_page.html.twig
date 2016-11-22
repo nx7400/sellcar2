@@ -1,9 +1,9 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:UserPanel:userPanel{% endblock %}
+{% block title %}AppBundle:homePage:homePage{% endblock %}
 
 {% block body %}
-<body>
+    <body>
     <header>
         <div id="top_bar">
             <div id="logo">
@@ -15,21 +15,17 @@
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="{{ path('homepage') }}">Strona Główna</a>
+        <a href="{{ path('login') }}">Zaloguj sie</a>
+        <a href="{{ path('register') }}">Zarejestruj sie</a>
         <a href="{{ path('adForm') }}">Dodaj ogłoszenie</a>
         <a href="{{ path('ad_index') }}">Zobacz ogłoszenia</a>
-        <a href="{{ path('logout') }}">Wyloguj</a>
+        <a href="{{ path('userPanel') }}">Panel uzytkownika</a>
     </div>
 
     <div id="user_ads">
-        <p>Twoje ogłoszenia:</p>
+        <p>Witaj na SELLCAR</p>
     </div>
 
-
-    <div id="user_name">
-        <p>Witaj!</p><br>
-        <p>{{ userName }}</p>
-    </div>
 
     <script>
         function openNav() {
@@ -41,7 +37,7 @@
         }
     </script>
 
-</body>
+    </body>
 
 {% endblock %}
 
@@ -78,23 +74,6 @@
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
         }
 
-        #user_name{
-            height:300px;
-            width:300px;
-            float: right;
-            background-color: #2980B9;
-            padding: 40px;
-            font-family: Helvetica, SansSerif;
-            font-size: 40px;
-            text-align: center;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            transition: 0.3s;
-
-        }
-
-        #user_name:hover{
-            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.5);
-        }
 
         #top_bar{
             height: 80px;
@@ -158,3 +137,4 @@
 
     </style>
 {% endblock %}
+

@@ -2,66 +2,139 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\AppBundle;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
-use AppBundle\Form\AdType;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use AppBundle\Entity\Ad;
-use AppBundle\Entity\User;
-use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\Routing\RouterInterface;
+use AppBundle\Form\AdType;
 
+/**
+ * Ad controller.
+ *
+ * @Route("/ad")
+ */
 class AdController extends Controller
 {
-//    /**
-//     * @var \Symfony\Component\Routing\RouterInterface
-//     */
-//    private $router;
-//
-//    public function __construct(RouterInterface $router)
-//    {
-//        $this->router = $router;
-//    }
-
     /**
-     * @Route("/ad", name="adFrom")
+     * Lists all Ad entities.
+     *
+     * @Route("/", name="ad_index")
+     * @Method("GET")
      */
-    public function adAction(Request $request)
+    public function indexAction()
     {
+        $em = $this->getDoctrine()->getManager();
 
+        $ads = $em->getRepository('AppBundle:Ad')->findAll();
 
-        $user=$request->getSession()->get('user');
-        if($user == NULL){
-            die('Musisz byc zalogowany');
-//            $redirection = new RedirectResponse($this->router->generate('login'
-//            ));
-        }
-
-        $ad = new Ad();
-        $form = $this->createForm(AdType::class, $ad);
-
-
-
-        $form->handleRequest($request);
-
-        if($form->isSubmitted() && $form->isValid()){
-
-            $user=$request->getSession()->get('user');
-            $ad->setUser($user);
-
-            $file = $ad->getImage();
-            $fileName = $this->get('app.image_uploader')->upload($file);
-            $ad->setImage($fileName);
-
-            $em = $this->getDoctrine()->getManager();
-            $em->merge($ad); //it working but why?
-            $em->flush();
-        }
-
-        return $this->render('AppBundle:Ad:ad.html.twig', array('form' => $form->createView()
-            // ...
+        return $this->render('ad/index.html.twig', array(
+            'ads' => $ads,
         ));
     }
 
+    /**
+     * Creates a new Ad entity.
+     *
+     * @Route("/new", name="ad_new")
+     * @Method({"GET", "POST"})
+     */
+    public function newAction(Request $request)
+    {
+        $ad = new Ad();
+        $form = $this->createForm('AppBundle\Form\AdType', $ad);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ad);
+            $em->flush();
+
+            return $this->redirectToRoute('ad_show', array('id' => $ad->getId()));
+        }
+
+        return $this->render('ad/new.html.twig', array(
+            'ad' => $ad,
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * Finds and displays a Ad entity.
+     *
+     * @Route("/{id}", name="ad_show")
+     * @Method("GET")
+     */
+    public function showAction(Ad $ad)
+    {
+        $deleteForm = $this->createDeleteForm($ad);
+
+        return $this->render('ad/show.html.twig', array(
+            'ad' => $ad,
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Displays a form to edit an existing Ad entity.
+     *
+     * @Route("/{id}/edit", name="ad_edit")
+     * @Method({"GET", "POST"})
+     */
+    public function editAction(Request $request, Ad $ad)
+    {
+        $deleteForm = $this->createDeleteForm($ad);
+        $editForm = $this->createForm('AppBundle\Form\AdType', $ad);
+        $editForm->handleRequest($request);
+
+        if ($editForm->isSubmitted() && $editForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($ad);
+            $em->flush();
+
+            return $this->redirectToRoute('ad_edit', array('id' => $ad->getId()));
+        }
+
+        return $this->render('ad/edit.html.twig', array(
+            'ad' => $ad,
+            'edit_form' => $editForm->createView(),
+            'delete_form' => $deleteForm->createView(),
+        ));
+    }
+
+    /**
+     * Deletes a Ad entity.
+     *
+     * @Route("/{id}", name="ad_delete")
+     * @Method("DELETE")
+     */
+    public function deleteAction(Request $request, Ad $ad)
+    {
+        $form = $this->createDeleteForm($ad);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($ad);
+            $em->flush();
+        }
+
+        return $this->redirectToRoute('ad_index');
+    }
+
+    /**
+     * Creates a form to delete a Ad entity.
+     *
+     * @param Ad $ad The Ad entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Ad $ad)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('ad_delete', array('id' => $ad->getId())))
+            ->setMethod('DELETE')
+            ->getForm()
+        ;
+    }
 }

@@ -23,6 +23,7 @@ class AuthenticationSuccessHandler implements AuthenticationSuccessHandlerInterf
      */
     private $router;
     protected $authorizationChecker;
+
     /**
      * @param RouterInterface $router
      */

@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class RegistrationController extends Controller
 {
     /**
-     * @Route("/registration")
+     * @Route("/registration", name="register")
      */
     public function registrationAction(Request $request)
     {

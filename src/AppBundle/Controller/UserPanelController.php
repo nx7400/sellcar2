@@ -17,6 +17,10 @@ class UserPanelController extends Controller
     {
 
         $user=$request->getSession()->get('user');
+        if($user == NULL){
+
+            return $this->redirect($this->generateUrl('login'));
+        }
 
         $userName=$user->getUsername();
 

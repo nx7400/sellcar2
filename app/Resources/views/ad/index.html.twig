@@ -1,0 +1,185 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <header>
+        <div id="top_bar">
+            <div id="logo">
+                <span id="menu" onclick="openNav()">MENU</span>
+            </div>
+
+        </div>
+    </header>
+
+    <div id="mySidenav" class="sidenav">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <a href="{{ path('homepage') }}">Strona główna</a>
+        <a href="{{ path('login') }}">Zaloguj sie</a>
+        <a href="{{ path('register') }}">Zarejestruj sie</a>
+        <a href="{{ path('adForm') }}">Dodaj ogłoszenie</a>
+        <a href="{{ path('userPanel') }}">Panel uzytkownika</a>
+    </div>
+
+
+    <script>
+        function openNav() {
+            document.getElementById("mySidenav").style.width = "250px";
+        }
+
+        function closeNav() {
+            document.getElementById("mySidenav").style.width = "0";
+        }
+    </script>
+
+
+    <div id="ads_header">
+        <h1>Ogłoszenia</h1>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <!--<th>Id</th>!-->
+                <th><div class="tab_head">Tytuł</div></th>
+                <th><div class="tab_head">Cena</div></th>
+                <th><div class="tab_head">Marka</div></th>
+                <th><div class="tab_head">Model</div></th>
+                <th><div class="tab_head">Rok produkcji</div></th>
+                <th><div class="tab_head">Moc</div></th>
+                <th><div class="tab_head">Przebieg</div></th>
+                <!--<th>Actions</th>!-->
+            </tr>
+        </thead>
+        <tbody>
+        {% for ad in ads %}
+            <tr>
+                <!--<td><a href="{{ path('ad_show', { 'id': ad.id }) }}">{{ ad.id }}</a></td>!-->
+                <td><div class="tab_record">{{ ad.title }}</div></td>
+                <td><div class="tab_record">{{ ad.price }} zł</div></td>
+                <td><div class="tab_record">{{ ad.brand }}</div></td>
+                <td><div class="tab_record">{{ ad.model }}</div></td>
+                <td><div class="tab_record">{{ ad.yearProduction }}</div></td>
+                <td><div class="tab_record">{{ ad.power }} KM</div></td>
+                <td><div class="tab_record">{{ ad.kilometers }} km</div></td>
+                <td>
+                    <ul>
+                        <li>
+                            <div class="tab_record"><a href="{{ path('ad_show', { 'id': ad.id }) }}">Pokaż</a></div>
+                        </li>
+                       <!-- <li>
+                            <a href="{{ path('ad_edit', { 'id': ad.id }) }}">edit</a>
+                        </li> !-->
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   <!-- <ul>
+        <li>
+            <a href="{{ path('ad_new') }}">Create a new entry</a>
+        </li>
+    </ul> !-->
+{% endblock %}
+
+{% block stylesheets %}
+    <style>
+
+        body{
+            background-color: #ECF0F1;
+        }
+
+        #menu{
+            font-family: Helvetica, SansSerif;
+            font-size: 40px;
+
+        }
+
+        #menu:hover{
+            color: #818181;
+        }
+
+        #ads_header{
+            height: 100px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+        .tab_head{
+            height: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            font-family: SansSerif;
+            font-size: 25px;
+
+        }
+
+        .tab_record{
+            height: 50px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            font-family: SansSerif;
+            font-size: 20px;
+        }
+
+
+        #top_bar{
+            height: 80px;
+            background-color: #2C3E50;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+        }
+
+        #logo{
+            height: 80px;
+            width: 200px;
+            background-color: #99CDD8;
+            text-align: center;
+        }
+
+        #logo:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 0;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #111;
+            overflow-x: hidden;
+            padding-top: 60px;
+            transition: 0.5s;
+        }
+
+        .sidenav a {
+            padding: 8px 8px 8px 32px;
+            text-decoration: none;
+            font-size: 25px;
+            color: #818181;
+            display: block;
+            transition: 0.3s
+        }
+
+        .sidenav a:hover, .offcanvas a:focus{
+            color: #f1f1f1;
+        }
+
+        .sidenav .closebtn {
+            position: absolute;
+            top: 0;
+            right: 25px;
+            font-size: 36px;
+            margin-left: 50px;
+        }
+
+
+        @media screen and (max-height: 450px) {
+            .sidenav {padding-top: 15px;}
+            .sidenav a {font-size: 18px;}
+        }
+
+
+    </style>
+{% endblock %}
