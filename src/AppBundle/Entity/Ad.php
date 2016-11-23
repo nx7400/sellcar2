@@ -61,6 +61,12 @@ class Ad
     private $yearProduction;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     * @Assert\NotBlank()
+     */
+    private $city;
+
+    /**
      * @ORM\Column(type="integer")
      * @Assert\NotBlank()
      */
@@ -172,6 +178,19 @@ class Ad
         $this->yearProduction = $yearProduction;
     }
 
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * @param mixed $city
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
     /**
      * @return mixed
      */
@@ -203,7 +222,6 @@ class Ad
     {
         $this->kilometers = $kilometers;
     }
-
 
     /**
      * Get id

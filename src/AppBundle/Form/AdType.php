@@ -19,6 +19,7 @@ class AdType extends AbstractType
             ->add("brand", TextType::class)
             ->add("model", TextType::class)
             ->add("yearProduction", IntegerType::class)
+            ->add("city", TextType::class)
             ->add("power", IntegerType::class)
             ->add("kilometers", IntegerType::class)
             ->add("price", NumberType::class)

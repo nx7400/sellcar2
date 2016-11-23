@@ -7,7 +7,7 @@
     <header>
         <div id="top_bar">
             <div id="logo">
-                <span id="menu" onclick="openNav()">MENU</span>
+                <button class="menu" onclick="openNav()">MENU</button>
             </div>
 
         </div>
@@ -52,14 +52,18 @@
             background-color: #ECF0F1;
         }
 
-        #menu{
-            font-family: Helvetica, SansSerif;
-            font-size: 40px;
-
-        }
-
-        #menu:hover{
-            color: #818181;
+        .menu {
+            position: relative;
+            background-color: #99CDD8;
+            border: none;
+            font-size: 28px;
+            color: #000000;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         #user_ads{

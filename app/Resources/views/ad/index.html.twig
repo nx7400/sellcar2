@@ -5,7 +5,7 @@
     <header>
         <div id="top_bar">
             <div id="logo">
-                <span id="menu" onclick="openNav()">MENU</span>
+                <button class="menu" onclick="openNav()">MENU</button>
             </div>
 
         </div>
@@ -29,42 +29,89 @@
         function closeNav() {
             document.getElementById("mySidenav").style.width = "0";
         }
+
+        function searchModel() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("searchModelInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("adTable");
+            tr = table.getElementsByTagName("tr");
+
+            for(i = 0; i < tr.length; i++){
+                td = tr[i].getElementsByTagName("td")[3];
+                if(td){
+                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+                        tr[i].style.display = "";
+
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function searchCity() {
+            var input, filter, table, tr, td, i;
+            input = document.getElementById("searchCityInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("adTable");
+            tr = table.getElementsByTagName("tr");
+
+            for(i = 0; i < tr.length; i++){
+                td = tr[i].getElementsByTagName("td")[4];
+                if(td){
+                    if(td.innerHTML.toUpperCase().indexOf(filter) > -1){
+                        tr[i].style.display = "";
+
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
     </script>
+
+
 
 
     <div id="ads_header">
         <h1>Ogłoszenia</h1>
     </div>
 
-    <table>
+    <input type="text" id="searchModelInput" onkeyup="searchModel()" placeholder="Jakiego modelu szukasz?">
+    <input type="text" id="searchCityInput" onkeyup="searchCity()" placeholder="W jakim miescie?">
+
+    <table id="adTable">
         <thead>
-            <tr>
+            <tr class="header">
                 <!--<th>Id</th>!-->
-                <th><div class="tab_head">Tytuł</div></th>
-                <th><div class="tab_head">Cena</div></th>
-                <th><div class="tab_head">Marka</div></th>
-                <th><div class="tab_head">Model</div></th>
-                <th><div class="tab_head">Rok produkcji</div></th>
-                <th><div class="tab_head">Moc</div></th>
-                <th><div class="tab_head">Przebieg</div></th>
-                <!--<th>Actions</th>!-->
+                <th>Tytuł</th>
+                <th>Cena</th>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Miasto</th>
+                <th>Rok produkcji</th>
+                <th>Moc</th>
+                <th>Przebieg</th>
+                <th>Opcje</th>
             </tr>
         </thead>
         <tbody>
         {% for ad in ads %}
             <tr>
                 <!--<td><a href="{{ path('ad_show', { 'id': ad.id }) }}">{{ ad.id }}</a></td>!-->
-                <td><div class="tab_record">{{ ad.title }}</div></td>
-                <td><div class="tab_record">{{ ad.price }} zł</div></td>
-                <td><div class="tab_record">{{ ad.brand }}</div></td>
-                <td><div class="tab_record">{{ ad.model }}</div></td>
-                <td><div class="tab_record">{{ ad.yearProduction }}</div></td>
-                <td><div class="tab_record">{{ ad.power }} KM</div></td>
-                <td><div class="tab_record">{{ ad.kilometers }} km</div></td>
+                <td>{{ ad.title }}</td>
+                <td>{{ ad.price }} zł</td>
+                <td>{{ ad.brand }}</td>
+                <td>{{ ad.model }}</td>
+                <td>{{ ad.city }}</td>
+                <td>{{ ad.yearProduction }}</td>
+                <td>{{ ad.power }} KM</td>
+                <td>{{ ad.kilometers }} km</td>
                 <td>
                     <ul>
                         <li>
-                            <div class="tab_record"><a href="{{ path('ad_show', { 'id': ad.id }) }}">Pokaż</a></div>
+                            <a href="{{ path('ad_show', { 'id': ad.id }) }}">Pokaż</a>
                         </li>
                        <!-- <li>
                             <a href="{{ path('ad_edit', { 'id': ad.id }) }}">edit</a>
@@ -90,14 +137,18 @@
             background-color: #ECF0F1;
         }
 
-        #menu{
-            font-family: Helvetica, SansSerif;
-            font-size: 40px;
-
-        }
-
-        #menu:hover{
-            color: #818181;
+        .menu {
+            position: relative;
+            background-color: #99CDD8;
+            border: none;
+            font-size: 28px;
+            color: #000000;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         #ads_header{
@@ -105,21 +156,27 @@
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
         }
 
-        .tab_head{
-            height: 50px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            font-family: SansSerif;
-            font-size: 25px;
+
+        #adTable{
+            border-collapse: collapse;
+            width: 80%;
+            border: 1px solid #2C3E50;
+            font-size: 18px;
 
         }
 
-        .tab_record{
-            height: 50px;
-            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            font-family: SansSerif;
-            font-size: 20px;
+        #adTable th, #adTable td{
+            text-align: left;
+            padding: 12px;
         }
 
+        #adTable tr{
+            border-bottom: 1px solid #2C3E50;
+        }
+
+        #adTable tr.header, #adTable tr:hover{
+            background-color: #F1F1F1;
+        }
 
         #top_bar{
             height: 80px;
@@ -138,6 +195,24 @@
 
         #logo:hover{
             box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+        #searchModelInput {
+            width: 50%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #66dd66;
+            margin-bottom: 12px;
+
+        }
+
+        #searchCityInput {
+            width: 50%;
+            font-size: 16px;
+            padding: 12px 20px 12px 40px;
+            border: 1px solid #66dd66;
+            margin-bottom: 12px;
+
         }
 
         .sidenav {
