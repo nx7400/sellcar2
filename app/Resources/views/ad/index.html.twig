@@ -7,8 +7,12 @@
             <div id="logo">
                 <button class="menu" onclick="openNav()">MENU</button>
             </div>
-
+            <!--<div class="test">
+                <a href="new.html.twig">Nowe</a>
+                <a href="{{ path('userPanel') }}"></a>
+            </div> !-->
         </div>
+        <script src="{{ asset('js/sorttable.js') }}"></script>
     </header>
 
     <div id="mySidenav" class="sidenav">
@@ -69,30 +73,29 @@
                 }
             }
         }
+
     </script>
 
-
-
-
     <div id="ads_header">
-        <h1>Ogłoszenia</h1>
+        <h1>Ogloszenia</h1>
     </div>
 
     <input type="text" id="searchModelInput" onkeyup="searchModel()" placeholder="Jakiego modelu szukasz?">
     <input type="text" id="searchCityInput" onkeyup="searchCity()" placeholder="W jakim miescie?">
 
-    <table id="adTable">
+    <table class="sortable" id="adTable">
         <thead>
             <tr class="header">
                 <!--<th>Id</th>!-->
                 <th>Tytuł</th>
-                <th>Cena</th>
+                <th>Cena [zł]</th>
                 <th>Marka</th>
                 <th>Model</th>
                 <th>Miasto</th>
                 <th>Rok produkcji</th>
-                <th>Moc</th>
-                <th>Przebieg</th>
+                <th>Moc [KM]</th>
+                <th>Przebieg [km]</th>
+                <th>Data dodania</th>
                 <th>Opcje</th>
             </tr>
         </thead>
@@ -101,13 +104,14 @@
             <tr>
                 <!--<td><a href="{{ path('ad_show', { 'id': ad.id }) }}">{{ ad.id }}</a></td>!-->
                 <td>{{ ad.title }}</td>
-                <td>{{ ad.price }} zł</td>
+                <td>{{ ad.price }}</td>
                 <td>{{ ad.brand }}</td>
                 <td>{{ ad.model }}</td>
                 <td>{{ ad.city }}</td>
                 <td>{{ ad.yearProduction }}</td>
-                <td>{{ ad.power }} KM</td>
-                <td>{{ ad.kilometers }} km</td>
+                <td>{{ ad.power }}</td>
+                <td>{{ ad.kilometers }}</td>
+                <td>{{ ad.date|date('Y-m-d') }}</td>
                 <td>
                     <ul>
                         <li>
@@ -136,6 +140,7 @@
         body{
             background-color: #ECF0F1;
         }
+
 
         .menu {
             position: relative;

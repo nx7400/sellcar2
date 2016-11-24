@@ -28,6 +28,7 @@ class AdFormController extends Controller
         }
 
         $ad = new Ad();
+        $ad->setDate(new \DateTime("now"));
         $form = $this->createForm(AdType::class, $ad);
 
 
@@ -46,6 +47,8 @@ class AdFormController extends Controller
             $em = $this->getDoctrine()->getManager();
             $em->merge($ad); //it working but why?
             $em->flush();
+
+            return $this->redirect($this->generateUrl('ad_index'));
         }
 
         return $this->render('AppBundle:Ad:ad.html.twig', array('form' => $form->createView()

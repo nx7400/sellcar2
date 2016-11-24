@@ -86,6 +86,33 @@ class Ad
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
+     * Set date
+     *
+     * @param datetime
+     *
+     * @return Ad
+     */
+    public function setDate($date)
+    {
+        $this->date = $date;
+        return $this;
+    }
+    /**
+     *Get date
+     *
+     * @return string
+     */
+    public function getDate()
+    {
+        return $this->date;
+    }
+
     public function getImage()
     {
         return $this->image;
