@@ -43,6 +43,7 @@ class AdFormController extends Controller
             $file = $ad->getImage();
             $fileName = $this->get('app.image_uploader')->upload($file);
             $ad->setImage($fileName);
+            $ad->setPath("uploads/images/{$fileName}");
 
             $em = $this->getDoctrine()->getManager();
             $em->merge($ad); //it working but why?

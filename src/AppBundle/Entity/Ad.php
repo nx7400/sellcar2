@@ -92,6 +92,34 @@ class Ad
     private $date;
 
     /**
+     * @ORM\Column(type="string", length=300)
+     */
+    public $path;
+
+    /**
+     * Set path
+     *
+     * @param string
+     *
+     * @return Ad
+     */
+    public function setPath($path)
+    {
+        $this->path = $path;
+        return $this;
+    }
+
+    /**
+     * Get path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->path;
+    }
+
+    /**
      * Set date
      *
      * @param datetime
@@ -103,6 +131,7 @@ class Ad
         $this->date = $date;
         return $this;
     }
+
     /**
      *Get date
      *
@@ -112,6 +141,8 @@ class Ad
     {
         return $this->date;
     }
+
+
 
     public function getImage()
     {
