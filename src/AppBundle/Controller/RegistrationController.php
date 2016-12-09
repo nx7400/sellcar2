@@ -27,15 +27,13 @@ class RegistrationController extends Controller
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
+            $request->getSession()->set('user',$user);
+
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
-
-            //return $this->redirectToRoute('replace_with_some_route');
-            return new Response('Saved new user with id '.$user->getId());
+            return $this->redirect($this->generateUrl('userPanel'));
         }
 
         return $this->render('AppBundle:Registration:registration.html.twig', array('form' => $form->createView()

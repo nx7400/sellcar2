@@ -1,6 +1,6 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}AppBundle:UserPanel:userPanel{% endblock %}
+{% block title %}Panel użytkownika{% endblock %}
 
 {% block body %}
 <body>
@@ -9,6 +9,7 @@
             <div id="logo">
                 <button class="menu" onclick="openNav()">MENU</button>
             </div>
+
 
         </div>
     </header>
@@ -23,6 +24,52 @@
 
     <div id="user_ads">
         <p>Twoje ogłoszenia:</p>
+
+        <table class="sortable" id="adTable">
+            <thead>
+            <tr class="header">
+                <!--<th>Id</th>!-->
+                <th>Tytuł</th>
+                <th>Cena [zł]</th>
+                <th>Marka</th>
+                <th>Model</th>
+                <th>Miasto</th>
+                <th>Rok produkcji</th>
+                <th>Moc [KM]</th>
+                <th>Przebieg [km]</th>
+                <th>Data dodania</th>
+                <th>Opcje</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for ad in  userAds  %}
+                <tr>
+                    <!--<td><a href="{{ path('ad_show', { 'id': ad.id }) }}">{{ ad.id }}</a></td>!-->
+                    <td>{{ ad.title }}</td>
+                    <td>{{ ad.price }}</td>
+                    <td>{{ ad.brand }}</td>
+                    <td>{{ ad.model }}</td>
+                    <td>{{ ad.city }}</td>
+                    <td>{{ ad.yearProduction }}</td>
+                    <td>{{ ad.power }}</td>
+                    <td>{{ ad.kilometers }}</td>
+                    <td>{{ ad.date|date('Y-m-d') }}</td>
+                    <td>
+                        <!-- <ul>
+                        <li>
+                            <a href="{{ path('ad_show', { 'id': ad.id }) }}">Pokaż</a>
+                        </li>
+                       <li>
+                            <a href="{{ path('ad_edit', { 'id': ad.id }) }}">edit</a>
+                        </li>
+                    </ul> !-->
+
+                        <button id="showButton" onclick="location.href='{{ path('ad_show', { 'id': ad.id }) }}'" >Pokaż</button>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
     </div>
 
 
@@ -51,6 +98,53 @@
         body{
             background-color: #ECF0F1;
         }
+
+        #user_ads{
+            height: 100px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        }
+
+        #showButton{
+            position: relative;
+            background-color: #629755;
+            border: none;
+            font-size: 24px;
+            color: #FFFFFF;
+            padding: 20px;
+            width: 180px;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #showButton:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+
+        #adTable{
+            border-collapse: collapse;
+            width: 80%;
+            border: 1px solid #2C3E50;
+            font-size: 18px;
+            background-color: #FFFFFF;
+
+        }
+
+        #adTable th, #adTable td{
+            text-align: left;
+            padding: 12px;
+        }
+
+        #adTable tr{
+            border-bottom: 1px solid #2C3E50;
+        }
+
+        #adTable tr.header, #adTable tr:hover{
+            background-color: #F1F1F1;
+        }
+
 
         .menu {
             position: relative;

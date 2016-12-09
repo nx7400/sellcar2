@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Dostępne ogłoszenia{% endblock %}
+
 {% block body %}
 
     <header>
@@ -113,14 +115,16 @@
                 <td>{{ ad.kilometers }}</td>
                 <td>{{ ad.date|date('Y-m-d') }}</td>
                 <td>
-                    <ul>
+                    <!-- <ul>
                         <li>
                             <a href="{{ path('ad_show', { 'id': ad.id }) }}">Pokaż</a>
                         </li>
-                       <!-- <li>
+                       <li>
                             <a href="{{ path('ad_edit', { 'id': ad.id }) }}">edit</a>
-                        </li> !-->
-                    </ul>
+                        </li>
+                    </ul> !-->
+
+                   <button id="showButton" onclick="location.href='{{ path('ad_show', { 'id': ad.id }) }}'" >Pokaż</button>
                 </td>
             </tr>
         {% endfor %}
@@ -130,8 +134,13 @@
    <!-- <ul>
         <li>
             <a href="{{ path('ad_new') }}">Create a new entry</a>
+
+
         </li>
     </ul> !-->
+
+
+
 {% endblock %}
 
 {% block stylesheets %}
@@ -154,6 +163,29 @@
             text-decoration: none;
             overflow: hidden;
             cursor: pointer;
+        }
+
+        #showButton{
+            position: relative;
+            background-color: #629755;
+            border: none;
+            font-size: 28px;
+            color: #FFFFFF;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #showButton:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+        #pages{
+            position: fixed;
+            bottom: 0px;
         }
 
         #ads_header{
@@ -179,8 +211,9 @@
             border-bottom: 1px solid #2C3E50;
         }
 
-        #adTable tr.header, #adTable tr:hover{
-            background-color: #F1F1F1;
+
+        #adTable tr:hover{
+            background-color: #99CDD8;
         }
 
         #top_bar{

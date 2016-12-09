@@ -19,6 +19,7 @@ class AdController extends Controller
     /**
      * Lists all Ad entities.
      *
+     *
      * @Route("/", name="ad_index")
      * @Method("GET")
      */
@@ -28,8 +29,22 @@ class AdController extends Controller
 
         $ads = $em->getRepository('AppBundle:Ad')->findAll();
 
+//        $ads2 = array();
+//
+//        for ($i=(($number-1)*10);$i<($number*10);$i++)
+//        {
+//            if($i <sizeof($ads))
+//            {
+//                if($ads[$i]!=null)
+//                {
+//                    array_push($ads2,$ads[$i]);
+//                }
+//            }
+//        }
+
         return $this->render('ad/index.html.twig', array(
             'ads' => $ads,
+            //'ads2' => $ads2,
         ));
     }
 

@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% block title %}Szczegóły ogłoszenia{% endblock %}
+
 {% block body %}
 
     <header>
@@ -7,11 +9,12 @@
             <div id="logo">
                 <button class="menu" onclick="openNav()">MENU</button>
             </div>
-
         </div>
     </header>
 
-    <div id="ad_details"><p>Szczegóły ogłoszenia</p></div>
+    <div id="ad_details">
+        <p>Szczegóły ogłoszenia</p>
+    </div>
 
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
@@ -33,14 +36,14 @@
     </script>
 
 
-    <table>
+    <table id="adTable">
         <tbody>
             <tr>
                 <th>Tytuł</th>
                 <td>{{ ad.title }}</td>
             </tr>
             <tr>
-                <th>Cena</th>
+                <th>Cena [zł]</th>
                 <td>{{ ad.price }}</td>
             </tr>
             <tr>
@@ -56,11 +59,11 @@
                 <td>{{ ad.yearProduction }}</td>
             </tr>
             <tr>
-                <th>Moc</th>
+                <th>Moc [KM]</th>
                 <td>{{ ad.power }}</td>
             </tr>
             <tr>
-                <th>Przebieg</th>
+                <th>Przebieg [km]</th>
                 <td>{{ ad.kilometers }}</td>
             </tr>
 
@@ -68,11 +71,19 @@
     </table>
 
 
-    <ul>
-        <li>
-            <a href="{{ path('ad_index') }}">Wróć do listy ogłoszeń</a>
-        </li>
-       <!-- <li>
+    <div id="picture_bar">
+        <p>Zdjęcie</p>
+    </div>
+
+    <img src="{{ asset(ad.path) }}" width="640" height="450"/>
+
+    <div id="button"><button id="backButton" onclick="location.href='{{ path('ad_index') }}'" >Wróć do listy ogłoszeń</button></div>
+
+    <!--  <ul>
+
+
+
+       <li>
             <a href="{{ path('ad_edit', { 'id': ad.id }) }}">Edit</a>
         </li>
         <li>
@@ -80,10 +91,10 @@
                 <input type="submit" value="Delete">
             {{ form_end(delete_form) }}
         </li>
-        !-->
-    </ul>
 
-    <img src="{{ asset(ad.path) }}" width="640" height="450"/>
+    </ul>!-->
+
+
 
 {% endblock %}
 
@@ -108,15 +119,64 @@
             cursor: pointer;
         }
 
+        #backButton{
+            position: relative;
+            background-color: #629755;
+            border: none;
+            font-size: 28px;
+            color: #FFFFFF;
+            padding: 20px;
+            width: 200px;
+            text-align: center;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        #backButton:hover{
+            box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2)
+        }
+
+
         #ad_details{
-            height: 50px;
+            height: 80px;
             background-color: #E74C3C;
-            margin-bottom: 5px;
+            margin-bottom: 10px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-            font-family: SansSerif;
-            font-size: 25px;
+            font-size: 29px;
+            font-family: Helvetica;
+            padding: 10px;
 
         }
+
+        #picture_bar{
+            height: 80px;
+            background-color: #2980B9;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            font-size: 29px;
+            font-family: Helvetica;
+            padding: 10px;
+        }
+
+        #adTable{
+            border-collapse: collapse;
+            font-size: 22px;
+            font-family: Helvetica;
+            text-align: left;
+            padding: 20px;
+            border-collapse: collapse;
+            width: 50%;
+            border: 1px solid #2C3E50;
+            background-color: #99CDD8
+
+        }
+
+        #adTable tr{
+            border-bottom: 1px solid #2C3E50;
+        }
+
 
 
         #top_bar{
